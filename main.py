@@ -1,4 +1,5 @@
 import csv
+monthly_budget = 0
 from datetime import datetime
 expenses = []
 def save_expenses():
@@ -206,6 +207,49 @@ def show_monthly_summary():
 
     for category, amount in category_totals.items():
         print(f"{category}: ₹{amount:.2f}")
+def set_budget():
+    global monthly_budget
+
+    try:
+        monthly_budget = float(input("Enter monthly budget: ₹"))
+
+        if monthly_budget < 0:
+            print("Budget cannot be negative.")
+            monthly_budget = 0
+            return
+
+        print(f"Monthly budget set to ₹{monthly_budget:.2f}")
+
+    except ValueError:
+        print("Please enter a valid amount.")
+
+
+def check_budget():
+    if monthly_budget == 0:
+        print("No monthly budget has been set.")
+        return
+
+    month = input("Enter month (MM): ")
+    year = input("Enter year (YYYY): ")
+
+    total = 0
+
+    for expense in expenses:
+        expense_date = datetime.strptime(expense["date"], "%d-%m-%Y")
+
+        if expense_date.month == int(month) and expense_date.year == int(year):
+            total += expense["amount"]
+
+    remaining = monthly_budget - total
+
+    print(f"\n===== BUDGET STATUS FOR {month}-{year} =====")
+    print(f"Monthly Budget: ₹{monthly_budget:.2f}")
+    print(f"Spent This Month: ₹{total:.2f}")
+
+    if remaining >= 0:
+        print(f"Remaining: ₹{remaining:.2f}")
+    else:
+        print(f"⚠️ Budget exceeded by: ₹{abs(remaining):.2f}")
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
@@ -215,7 +259,9 @@ while True:
     print("5. Update Expense")
     print("6. Summary")
     print("7. Monthly Summary")
-    print("8. Exit")
+    print("8. Set Monthly Budget")
+    print("9. Check Budget")
+    print("10. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -237,6 +283,11 @@ while True:
     elif choice == "7":
         show_monthly_summary()
     elif choice == "8":
+        set_budget()
+
+    elif choice == "9":
+        check_budget()
+    elif choice == "10":
         print("Goodbye!")
         break
 
