@@ -170,6 +170,42 @@ def show_summary():
     for category, amount in category_totals.items():
         print(f"{category}: ₹{amount:.2f}")
 load_expenses()
+def show_monthly_summary():
+    if not expenses:
+        print("No expenses recorded.")
+        return
+
+    month = input("Enter month (MM): ")
+    year = input("Enter year (YYYY): ")
+
+    total = 0
+    category_totals = {}
+
+    for expense in expenses:
+        expense_date = datetime.strptime(expense["date"], "%d-%m-%Y")
+
+        if expense_date.month == int(month) and expense_date.year == int(year):
+            amount = expense["amount"]
+            category = expense["category"]
+
+            total += amount
+
+            if category in category_totals:
+                category_totals[category] += amount
+            else:
+                category_totals[category] = amount
+
+    print(f"\n===== SUMMARY FOR {month}-{year} =====")
+    print(f"Total Spending: ₹{total:.2f}")
+
+    if not category_totals:
+        print("No expenses found for this month.")
+        return
+
+    print("\n--- Category-wise Spending ---")
+
+    for category, amount in category_totals.items():
+        print(f"{category}: ₹{amount:.2f}")
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
@@ -178,7 +214,8 @@ while True:
     print("4. Search Expenses")
     print("5. Update Expense")
     print("6. Summary")
-    print("7. Exit")
+    print("7. Monthly Summary")
+    print("8. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -198,6 +235,8 @@ while True:
     elif choice == "6":
         show_summary()
     elif choice == "7":
+        show_monthly_summary()
+    elif choice == "8":
         print("Goodbye!")
         break
 
