@@ -27,12 +27,34 @@ def view_expenses():
     for expense in expenses:
         print(f"₹{expense['amount']:.2f} | {expense['category']} | {expense['description']}")
 
+def delete_expense():
+    if not expenses:
+        print("No expenses to delete.")
+        return
+
+    print("\n--- Your Expenses ---")
+
+    for i, expense in enumerate(expenses, start=1):
+        print(f"{i}. ₹{expense['amount']:.2f} | {expense['category']} | {expense['description']}")
+
+    try:
+        choice = int(input("Enter expense number to delete: "))
+
+        if 1 <= choice <= len(expenses):
+            deleted = expenses.pop(choice - 1)
+            print(f"Deleted: ₹{deleted['amount']:.2f} | {deleted['description']}")
+        else:
+            print("Invalid expense number.")
+
+    except ValueError:
+        print("Please enter a valid number.")
 
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
     print("2. View Expenses")
-    print("3. Exit")
+    print("3. Delete Expense")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -43,6 +65,9 @@ while True:
         view_expenses()
 
     elif choice == "3":
+        delete_expense()
+
+    elif choice == "4":
         print("Goodbye!")
         break
 
