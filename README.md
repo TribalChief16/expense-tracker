@@ -1,29 +1,63 @@
-# Expense Tracker
+Expense Tracker
 
-A simple Python-based expense tracking application that helps users record, view, search, delete, and analyze their expenses.
+A Python-based personal expense management application that helps users record, manage, and analyze their spending.
 
-## Features
+Features
+Add expenses
+Automatically record expense dates
+View all expenses
+Update existing expenses
+Delete expenses
+Search expenses by category or description
+Calculate total spending
+View category-wise spending
+Generate monthly spending summaries
+Set a monthly budget
+Check monthly budget status
+Detect budget overruns
+Save expenses using CSV
+Load expenses automatically when the application starts
+Save monthly budget between sessions
+Technologies Used
+Python
+CSV
+Git
+GitHub
+Project Structure
 
-- Add expenses
-- View all expenses
-- Delete expenses
-- Search expenses by category or description
-- Calculate total spending
-- View category-wise spending
-- Save expenses using CSV
-- Load saved expenses when the application starts
+expense-tracker
+│
+├── main.py
+├── README.md
+└── .gitignore
 
-## Technologies Used
+expenses.csv and budget.txt are local data files and are excluded from Git tracking.
 
-- Python
-- CSV
-
-## How to Run
-
-1. Clone the repository.
-2. Open the project folder.
-3. Run the following command:
-
-```bash
+How to Run
+Clone the repository.
+Open the project folder in VS Code.
+Run:
 python main.py
-```
+Application Menu
+
+1. Add Expense
+2. View Expenses
+3. Delete Expense
+4. Search Expenses
+5. Update Expense
+6. Summary
+7. Monthly Summary
+8. Set Monthly Budget
+9. Check Budget
+10. Exit
+    Data Persistence
+
+Expense information is stored locally in a CSV file.
+
+The monthly budget is stored separately so that it remains available after restarting the application.
+
+Future Improvements-
+*Graphical user interface
+*Database integration
+*Expense charts and visual analytics
+*Category-based budget limits
