@@ -81,6 +81,42 @@ def delete_expense():
 
     except ValueError:
         print("Please enter a valid number.")
+def update_expense():
+    if not expenses:
+        print("No expenses to update.")
+        return
+
+    print("\n--- Your Expenses ---")
+
+    for i, expense in enumerate(expenses, start=1):
+        print(
+            f"{i}. {expense['date']} | "
+            f"₹{expense['amount']:.2f} | "
+            f"{expense['category']} | "
+            f"{expense['description']}"
+        )
+
+    try:
+        choice = int(input("Enter expense number to update: "))
+
+        if 1 <= choice <= len(expenses):
+            expense = expenses[choice - 1]
+
+            print("\nEnter new details:")
+
+            expense["amount"] = float(input("Enter new amount: ₹"))
+            expense["category"] = input("Enter new category: ")
+            expense["description"] = input("Enter new description: ")
+
+            save_expenses()
+
+            print("Expense updated successfully!")
+
+        else:
+            print("Invalid expense number.")
+
+    except ValueError:
+        print("Please enter a valid number.")
 def search_expenses():
         if not expenses:
             print("No expenses recorded.")
@@ -140,8 +176,9 @@ while True:
     print("2. View Expenses")
     print("3. Delete Expense")
     print("4. Search Expenses")
-    print("5. Summary")
-    print("6. Exit")
+    print("5. Update Expense")
+    print("6. Summary")
+    print("7. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -157,8 +194,10 @@ while True:
     elif choice == "4":
         search_expenses()
     elif choice == "5":
-        show_summary()
+        update_expense()
     elif choice == "6":
+        show_summary()
+    elif choice == "7":
         print("Goodbye!")
         break
 
