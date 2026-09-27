@@ -1,10 +1,11 @@
 import csv
+from datetime import datetime
 expenses = []
 def save_expenses():
     with open("expenses.csv", "w", newline="") as file:
         writer = csv.DictWriter(
             file,
-            fieldnames=["amount", "category", "description"]
+            fieldnames=["date","amount", "category", "description"]
         )
 
         writer.writeheader()
@@ -27,8 +28,10 @@ def add_expense():
     amount = float(input("Enter amount: ₹"))
     category = input("Enter category: ")
     description = input("Enter description: ")
+    date = datetime.now().strftime("%d-%m-%Y")
 
     expense = {
+        "date": date,
         "amount": amount,
         "category": category,
         "description": description
@@ -48,7 +51,10 @@ def view_expenses():
     print("\n--- Your Expenses ---")
 
     for expense in expenses:
-        print(f"₹{expense['amount']:.2f} | {expense['category']} | {expense['description']}")
+        print(f"{expense['date']} | "
+    f"₹{expense['amount']:.2f} | "
+    f"{expense['category']} | "
+    f"{expense['description']}")
 
 def delete_expense():
     if not expenses:
@@ -58,7 +64,10 @@ def delete_expense():
     print("\n--- Your Expenses ---")
 
     for i, expense in enumerate(expenses, start=1):
-        print(f"{i}. ₹{expense['amount']:.2f} | {expense['category']} | {expense['description']}")
+        print(f"{expense['date']} | "
+    f"₹{expense['amount']:.2f} | "
+    f"{expense['category']} | "
+    f"{expense['description']}")
 
     try:
         choice = int(input("Enter expense number to delete: "))
@@ -88,6 +97,7 @@ def search_expenses():
                 search_term in expense["description"].lower()):
 
                 print(
+                f"{expense['date']} | "
                 f"₹{expense['amount']:.2f} | "
                 f"{expense['category']} | "
                 f"{expense['description']}"
