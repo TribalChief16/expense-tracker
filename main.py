@@ -73,6 +73,32 @@ def search_expenses():
 
         if not found:
             print("No matching expenses found.")
+def show_summary():
+    if not expenses:
+        print("No expenses recorded.")
+        return
+
+    total = 0
+    category_totals = {}
+
+    for expense in expenses:
+        amount = expense["amount"]
+        category = expense["category"]
+
+        total += amount
+
+        if category in category_totals:
+            category_totals[category] += amount
+        else:
+            category_totals[category] = amount
+
+    print("\n===== SUMMARY =====")
+    print(f"Total Spending: ₹{total:.2f}")
+
+    print("\n--- Category-wise Spending ---")
+
+    for category, amount in category_totals.items():
+        print(f"{category}: ₹{amount:.2f}")
 
 while True:
     print("\n===== EXPENSE TRACKER =====")
@@ -80,7 +106,8 @@ while True:
     print("2. View Expenses")
     print("3. Delete Expense")
     print("4. Search Expenses")
-    print("5. Exit")
+    print("5. Summary")
+    print("6. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -95,8 +122,9 @@ while True:
 
     elif choice == "4":
         search_expenses()
-
     elif choice == "5":
+        show_summary()
+    elif choice == "6":
         print("Goodbye!")
         break
 
