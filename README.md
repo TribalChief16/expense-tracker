@@ -61,3 +61,10 @@ Future Improvements-
 *Database integration
 *Expense charts and visual analytics
 *Category-based budget limits
+
+Screenshots:
+1.Main Menu
+
+2.Expenses and Monthly Summary
+
+3.Budget Status
