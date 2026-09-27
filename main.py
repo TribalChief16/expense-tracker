@@ -1,5 +1,27 @@
-
+import csv
 expenses = []
+def save_expenses():
+    with open("expenses.csv", "w", newline="") as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=["amount", "category", "description"]
+        )
+
+        writer.writeheader()
+        writer.writerows(expenses)
+
+
+def load_expenses():
+    try:
+        with open("expenses.csv", "r") as file:
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                row["amount"] = float(row["amount"])
+                expenses.append(row)
+
+    except FileNotFoundError:
+        pass
 
 def add_expense():
     amount = float(input("Enter amount: ₹"))
@@ -13,6 +35,7 @@ def add_expense():
     }
 
     expenses.append(expense)
+    save_expenses()
 
     print("Expense added successfully!")
 
@@ -42,6 +65,7 @@ def delete_expense():
 
         if 1 <= choice <= len(expenses):
             deleted = expenses.pop(choice - 1)
+            save_expenses()
             print(f"Deleted: ₹{deleted['amount']:.2f} | {deleted['description']}")
         else:
             print("Invalid expense number.")
@@ -99,7 +123,7 @@ def show_summary():
 
     for category, amount in category_totals.items():
         print(f"{category}: ₹{amount:.2f}")
-
+load_expenses()
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
