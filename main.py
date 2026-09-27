@@ -11,6 +11,18 @@ def save_expenses():
 
         writer.writeheader()
         writer.writerows(expenses)
+def save_budget():
+    with open("budget.txt", "w") as file:
+        file.write(str(monthly_budget))
+def load_budget():
+    global monthly_budget
+
+    try:
+        with open("budget.txt", "r") as file:
+            monthly_budget = float(file.read())
+
+    except FileNotFoundError:
+        monthly_budget = 0
 
 
 def load_expenses():
@@ -217,6 +229,7 @@ def set_budget():
             print("Budget cannot be negative.")
             monthly_budget = 0
             return
+        save_budget()
 
         print(f"Monthly budget set to ₹{monthly_budget:.2f}")
 
@@ -250,6 +263,9 @@ def check_budget():
         print(f"Remaining: ₹{remaining:.2f}")
     else:
         print(f"⚠️ Budget exceeded by: ₹{abs(remaining):.2f}")
+load_expenses()
+load_budget()
+
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
