@@ -48,13 +48,39 @@ def delete_expense():
 
     except ValueError:
         print("Please enter a valid number.")
+def search_expenses():
+        if not expenses:
+            print("No expenses recorded.")
+            return
+
+        search_term = input("Enter category or description to search: ").lower()
+
+        found = False
+
+        print("\n--- Search Results ---")
+
+        for expense in expenses:
+            if (search_term in expense["category"].lower() or
+                search_term in expense["description"].lower()):
+
+                print(
+                f"₹{expense['amount']:.2f} | "
+                f"{expense['category']} | "
+                f"{expense['description']}"
+            )
+
+            found = True
+
+        if not found:
+            print("No matching expenses found.")
 
 while True:
     print("\n===== EXPENSE TRACKER =====")
     print("1. Add Expense")
     print("2. View Expenses")
     print("3. Delete Expense")
-    print("4. Exit")
+    print("4. Search Expenses")
+    print("5. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -68,6 +94,9 @@ while True:
         delete_expense()
 
     elif choice == "4":
+        search_expenses()
+
+    elif choice == "5":
         print("Goodbye!")
         break
 
