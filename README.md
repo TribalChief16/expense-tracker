@@ -1,8 +1,9 @@
-Expense Tracker
+# Expense Tracker
 
 A Python-based personal expense management application that helps users record, manage, and analyze their spending.
 
-Features
+## Features
+
 Add expenses
 Automatically record expense dates
 View all expenses
@@ -33,12 +34,14 @@ expense-tracker
 
 expenses.csv and budget.txt are local data files and are excluded from Git tracking.
 
-How to Run
+## How to Run
+
 Clone the repository.
 Open the project folder in VS Code.
 Run:
 python main.py
-Application Menu
+
+## Application Menu
 
 1. Add Expense
 2. View Expenses
@@ -56,13 +59,15 @@ Expense information is stored locally in a CSV file.
 
 The monthly budget is stored separately so that it remains available after restarting the application.
 
-Future Improvements-
+## Future Improvements-
+
 *Graphical user interface
 *Database integration
 *Expense charts and visual analytics
 *Category-based budget limits
 
-Screenshots:
+## Screenshots:
+
 1.Main Menu
 
 2.Expenses and Monthly Summary
